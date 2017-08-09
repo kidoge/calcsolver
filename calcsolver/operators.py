@@ -13,7 +13,11 @@ class AddOperator(Operator):
     return state.value() + self._value
 
   def __str__(self):
-    return "[ +%d ]" % self._value
+    if self._value > 0:
+      sign = "+" 
+    else:
+      sign = "-"
+    return "[ %s %d ]" % (sign, abs(self._value))
 
   def value(self):
     return self._value

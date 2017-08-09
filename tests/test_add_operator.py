@@ -18,3 +18,11 @@ class TestAddOperator(unittest.TestCase):
     state = State(value=5)
     state.apply(AddOperator(-8))
     self.assertEqual(state.value(), -3)
+
+  def test_str_positive(self):
+    string = str(AddOperator(3))
+    self.assertEqual(string, "[ + 3 ]")
+
+  def test_str_negative(self):
+    string = str(AddOperator(-5))
+    self.assertEqual(string, "[ - 5 ]")
