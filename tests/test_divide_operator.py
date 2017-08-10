@@ -1,18 +1,18 @@
 import unittest
-from calcsolver.state import State
+from calcsolver.core import State
 from calcsolver.operators import DivideOperator
 
 class TestDivideOperator(unittest.TestCase):
 
   def test_divide_positive(self):
-    state = State(value=50)
+    state = State(current_number=50)
     state.apply(DivideOperator(5))
-    self.assertEqual(state.value(), 10)
+    self.assertEqual(state.current_number, 10)
 
   def test_divide_negative(self):
-    state = State(value=24)
+    state = State(current_number=24)
     state.apply(DivideOperator(-3))
-    self.assertEqual(state.value(), -8)
+    self.assertEqual(state.current_number, -8)
 
   def test_str_positive(self):
     string = str(DivideOperator(2))

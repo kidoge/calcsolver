@@ -1,25 +1,25 @@
 import unittest
 from unittest.mock import Mock
 
-from calcsolver.state import State
+from calcsolver.core import State
 
 
 class TestState(unittest.TestCase):
 
   def test_default_init(self):
     state = State()
-    self.assertEqual(state.value(), 0)
-    self.assertEqual(state.steps(), [])
+    self.assertEqual(state.current_number, 0)
+    self.assertEqual(state.steps, [])
   
-  def test_init_with_value(self):
-    state = State(value=10)
-    self.assertEqual(state.value(), 10)
-    self.assertEqual(state.steps(), [])
+  def test_init_with_current_number(self):
+    state = State(current_number=10)
+    self.assertEqual(state.current_number, 10)
+    self.assertEqual(state.steps, [])
 
   def test_init_with_steps(self):
     state = State(steps=['a','b'])
-    self.assertEqual(state.value(), 0)
-    self.assertEqual(state.steps(), ['a', 'b'])
+    self.assertEqual(state.current_number, 0)
+    self.assertEqual(state.steps, ['a', 'b'])
 
   def test_apply_once(self):
     state = State()
@@ -28,8 +28,8 @@ class TestState(unittest.TestCase):
     state.apply(op)
     op.operate.assert_called_with(state)
 
-    self.assertEqual(state.value(), 3)
-    self.assertEqual(state.steps(), [op])
+    self.assertEqual(state.current_number, 3)
+    self.assertEqual(state.steps, [op])
 
   def test_apply_twice(self):
     state = State()
@@ -39,12 +39,12 @@ class TestState(unittest.TestCase):
     op1.operate.assert_called_with(state)
 
     def addTwo(state):
-      return state.value() + 4
+      return state.current_number + 4
 
     op2 = Mock()
     op2.operate.side_effect = addTwo
     state.apply(op2)
     op2.operate.assert_called_with(state)
 
-    self.assertEqual(state.value(), 7)
-    self.assertEqual(state.steps(), [op1, op2])
+    self.assertEqual(state.current_number, 7)
+    self.assertEqual(state.steps, [op1, op2])
