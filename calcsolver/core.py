@@ -45,7 +45,7 @@ class State:
 
     def clone(self):
         """Returns a clone object."""
-        return State(self._current_number, self._steps)
+        return State(self._current_number, list(self._steps))
 
     def apply(self, operator):
         """Applies an operator to the current state."""
