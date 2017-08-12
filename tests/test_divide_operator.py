@@ -15,6 +15,21 @@ class TestDivideOperator(unittest.TestCase):
         state.apply(DivideOperator(-3))
         self.assertEqual(state.current_number, -8)
 
+    def test_positive_good_fraction(self):
+        state = State(current_number=1)
+        state.apply(DivideOperator(8))
+        self.assertEqual(state.current_number, 0.125)
+
+    def test_positive_bad_fraction(self):
+        state = State(current_number=100)
+        with self.assertRaises(ValueError):
+            state.apply(DivideOperator(3))
+
+    def test_negative_bad_fraction(self):
+        state = State(current_number=-1)
+        with self.assertRaises(ValueError):
+            state.apply(DivideOperator(16))
+
     def test_str_positive(self):
         string = str(DivideOperator(2))
         self.assertEqual(string, "[ / 2 ]")

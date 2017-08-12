@@ -51,6 +51,8 @@ class DivideOperator(Operator):
         self._value = value
 
     def operate(self, state):
+        if (state.current_number * 1000 / self._value) % 1 != 0:
+            raise ValueError
         return state.current_number / self._value
 
     def __str__(self):
