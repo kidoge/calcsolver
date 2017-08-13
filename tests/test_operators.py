@@ -1,17 +1,17 @@
 import unittest
 from calcsolver.core import State
 from calcsolver.operators import (
-        OperatorWithNumber,
-        AddOperator,
-        MultiplyOperator,
-        DivideOperator
+    OperatorWithNumber,
+    AddOperator,
+    MultiplyOperator,
+    DivideOperator
 )
 
-class OperatorWithNumber1(OperatorWithNumber):
+class OperatorWithNumber1(OperatorWithNumber): # pylint: disable=too-few-public-methods
     def operate(self, number):
         pass
 
-class OperatorWithNumber2(OperatorWithNumber):
+class OperatorWithNumber2(OperatorWithNumber): # pylint: disable=too-few-public-methods
     def operate(self, number):
         pass
 

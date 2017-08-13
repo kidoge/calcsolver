@@ -1,7 +1,7 @@
 import unittest
 from calcsolver.core import Problem
 from calcsolver.operators import AddOperator, DivideOperator, MultiplyOperator
-from calcsolver.solvers import random_solve 
+from calcsolver.solvers import random_solve
 
 
 class TestRandomSolve(unittest.TestCase):

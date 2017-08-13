@@ -14,7 +14,7 @@ class TestProblem(unittest.TestCase):
         self.assertEqual(prob.end_number, 24)
         self.assertEqual(prob.move_count, 5)
         self.assertEqual(prob.operators, [1, 2, 3])
-    
+
     def test_starting_state(self):
         prob = Problem(start_number=10,
                        end_number=24,
