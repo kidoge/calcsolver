@@ -2,6 +2,7 @@
 
 
 import abc
+from math import copysign
 
 
 class Operator(object, metaclass=abc.ABCMeta):
@@ -61,6 +62,13 @@ class DivideOperator(OperatorWithNumber):
     def __str__(self):
         return "[ / %d ]" % self._value
 
+class InsertOperator(OperatorWithNumber):
+    """Operator that inserts a number as the lowest significant digit."""
+    def operate(self, current_number):
+        return copysign(abs(current_number) * 10 + self._value, current_number)
+
+    def __str__(self):
+        return "[ %d ]" % self._value
 class DiscardOperator(Operator):
     """Operator that discards the lowest significant digit."""
     def operate(self, current_number):

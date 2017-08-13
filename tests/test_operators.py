@@ -5,16 +5,20 @@ from calcsolver.operators import (
     AddOperator,
     MultiplyOperator,
     DivideOperator,
+    InsertOperator,
     DiscardOperator,
 )
+
 
 class OperatorWithNumber1(OperatorWithNumber):
     def operate(self, number):
         pass
 
+
 class OperatorWithNumber2(OperatorWithNumber):
     def operate(self, number):
         pass
+
 
 class TestOperatorWithNumber(unittest.TestCase):
     def test_same_operators(self):
@@ -80,6 +84,7 @@ class TestMultiplyOperator(unittest.TestCase):
         string = str(MultiplyOperator(-6))
         self.assertEqual(string, "[ * -6 ]")
 
+
 class TestDivideOperator(unittest.TestCase):
     def test_divide_positive(self):
         state = State(current_number=50)
@@ -113,6 +118,24 @@ class TestDivideOperator(unittest.TestCase):
     def test_str_negative(self):
         string = str(DivideOperator(-7))
         self.assertEqual(string, "[ / -7 ]")
+
+
+class TestInsertOperator(unittest.TestCase):
+    def test_insert_to_zero(self):
+        output = InsertOperator(5).operate(0)
+        self.assertEqual(output, 5)
+
+    def test_insert_to_positive(self):
+        output = InsertOperator(5).operate(123)
+        self.assertEqual(output, 1235)
+
+    def test_insert_to_negative(self):
+        output = InsertOperator(7).operate(-234)
+        self.assertEqual(output, -2347)
+
+    def test_str(self):
+        string = str(InsertOperator(4))
+        self.assertEqual(string, "[ 4 ]")
 
 class TestDiscardOperator(unittest.TestCase):
     def test_discard_positive(self):
