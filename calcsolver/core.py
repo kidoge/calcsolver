@@ -10,6 +10,9 @@ class Problem:
         self._move_count = move_count
         self._operators = operators
 
+    def starting_state(self):
+        return State(self._start_number)
+
     @property
     def start_number(self):
         """Returns the starting number."""

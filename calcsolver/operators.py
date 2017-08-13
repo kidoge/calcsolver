@@ -26,6 +26,9 @@ class AddOperator(Operator):
         else:
             sign = "-"
         return "[ %s %d ]" % (sign, abs(self._value))
+    
+    def __eq__(self, other):
+        return self._value == other.value
 
     @property
     def value(self):
@@ -43,6 +46,9 @@ class MultiplyOperator(Operator):
 
     def __str__(self):
         return "[ * %d ]" % self._value
+
+    def __eq__(self, other):
+        return self._value == other.value
 
     @property
     def value(self):
@@ -62,6 +68,9 @@ class DivideOperator(Operator):
 
     def __str__(self):
         return "[ / %d ]" % self._value
+
+    def __eq__(self, other):
+        return self._value == other.value
 
     @property
     def value(self):

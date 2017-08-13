@@ -27,3 +27,11 @@ class TestAddOperator(unittest.TestCase):
     def test_str_negative(self):
         string = str(AddOperator(-5))
         self.assertEqual(string, "[ - 5 ]")
+
+    def test_same_operators(self):
+        op1 = AddOperator(0)
+        op2 = AddOperator(0)
+        self.assertEqual(op1, op2)
+
+    def test_different_operators(self):
+        pass
