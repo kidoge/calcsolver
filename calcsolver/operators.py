@@ -4,7 +4,7 @@
 import abc
 
 
-class Operator(object, metaclass=abc.ABCMeta): # pylint: disable=too-few-public-methods
+class Operator(object, metaclass=abc.ABCMeta):
     """Abstract base class for all operators."""
     @abc.abstractmethod
     def operate(self, current_number):
@@ -61,3 +61,10 @@ class DivideOperator(OperatorWithNumber):
     def __str__(self):
         return "[ / %d ]" % self._value
 
+class DiscardOperator(Operator):
+    """Operator that discards the lowest significant digit."""
+    def operate(self, current_number):
+        return int(current_number / 10)
+
+    def __str__(self):
+        return "[ << ]"

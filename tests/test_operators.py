@@ -4,14 +4,15 @@ from calcsolver.operators import (
     OperatorWithNumber,
     AddOperator,
     MultiplyOperator,
-    DivideOperator
+    DivideOperator,
+    DiscardOperator,
 )
 
-class OperatorWithNumber1(OperatorWithNumber): # pylint: disable=too-few-public-methods
+class OperatorWithNumber1(OperatorWithNumber):
     def operate(self, number):
         pass
 
-class OperatorWithNumber2(OperatorWithNumber): # pylint: disable=too-few-public-methods
+class OperatorWithNumber2(OperatorWithNumber):
     def operate(self, number):
         pass
 
@@ -112,3 +113,24 @@ class TestDivideOperator(unittest.TestCase):
     def test_str_negative(self):
         string = str(DivideOperator(-7))
         self.assertEqual(string, "[ / -7 ]")
+
+class TestDiscardOperator(unittest.TestCase):
+    def test_discard_positive(self):
+        output = DiscardOperator().operate(1234)
+        self.assertEqual(output, 123)
+
+    def test_discard_negative(self):
+        output = DiscardOperator().operate(-7890)
+        self.assertEqual(output, -789)
+
+    def test_discard_single_digit(self):
+        output = DiscardOperator().operate(5)
+        self.assertEqual(output, 0)
+
+    def test_discard_zero(self):
+        output = DiscardOperator().operate(0)
+        self.assertEqual(output, 0)
+
+    def test_str(self):
+        self.assertEqual(str(DiscardOperator()), "[ << ]")
+
