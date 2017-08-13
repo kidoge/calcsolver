@@ -24,11 +24,11 @@ class TestRandomSolve(unittest.TestCase):
                           move_count=1,
                           operators=operators)
         solution = random_solve(problem)
-        self.assertEqual(solution, [AddOperator(2)])
+        self.assertEqual(solution, [MultiplyOperator(2)])
 
     def test_multiple_steps(self):
         operators = [AddOperator(1),
-                     MultiplyOperator(2),
+                     MultiplyOperator(20),
                      DivideOperator(3)]
         problem = Problem(start_number=2,
                           end_number=1,
