@@ -1,5 +1,6 @@
 """This module contains classes that are used in the rest of the module."""
 
+
 class Problem:
     """This class describes the problem definition."""
 
@@ -50,7 +51,7 @@ class State:
     def apply(self, operator):
         """Applies an operator to the current state."""
         self._steps.append(operator)
-        self._current_number = operator.operate(self)
+        self._current_number = operator.operate(self._current_number)
 
     @property
     def current_number(self):

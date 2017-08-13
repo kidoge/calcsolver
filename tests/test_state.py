@@ -4,8 +4,8 @@ from unittest.mock import Mock
 from calcsolver.core import State
 
 
-def add_two(state):
-    return state.current_number + 4
+def add_four(current_number):
+    return current_number + 4
 
 
 class TestState(unittest.TestCase):
@@ -26,26 +26,27 @@ class TestState(unittest.TestCase):
         self.assertEqual(state.steps, ['a', 'b'])
 
     def test_apply_once(self):
-        state = State()
+        state = State(current_number=1)
         op1 = Mock()
         op1.operate = Mock(return_value=3)
         state.apply(op1)
-        op1.operate.assert_called_with(state)
+        op1.operate.assert_called_with(1)
 
         self.assertEqual(state.current_number, 3)
         self.assertEqual(state.steps, [op1])
 
     def test_apply_twice(self):
         state = State()
+
         op1 = Mock()
-        op1.operate = Mock(return_value=3)
+        op1.operate.side_effect = add_four
         state.apply(op1)
-        op1.operate.assert_called_with(state)
+        op1.operate.assert_called_with(0)
 
         op2 = Mock()
-        op2.operate.side_effect = add_two
+        op2.operate = Mock(return_value=7)
         state.apply(op2)
-        op2.operate.assert_called_with(state)
+        op2.operate.assert_called_with(4)
 
         self.assertEqual(state.current_number, 7)
         self.assertEqual(state.steps, [op1, op2])
@@ -62,9 +63,8 @@ class TestState(unittest.TestCase):
         cloned_state = state.clone()
 
         op1 = Mock()
-        op1.operate.side_effect = add_two
+        op1.operate.side_effect = add_four
         state.apply(op1)
-        op1.operate.assert_called_with(state)
 
         self.assertEqual(cloned_state.current_number, 3)
         self.assertEqual(cloned_state.steps, [2, 4, 8])
