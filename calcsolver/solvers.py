@@ -7,6 +7,9 @@ def random_solve(problem):
         state = problem.starting_state()
         for idx in range(problem.move_count):
             operator = random.choice(problem.operators)
-            state.apply(operator)
+            try:
+                state.apply(operator)
+            except ValueError:
+                continue
         if state.current_number == problem.end_number:
             return state.steps
