@@ -11,6 +11,7 @@ class Problem:
         self._operators = operators
 
     def starting_state(self):
+        """Returns the initial state, with start_number and empty steps list."""
         return State(self._start_number)
 
     @property

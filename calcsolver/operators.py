@@ -16,13 +16,17 @@ class OperatorWithNumber(Operator):
     def __init__(self, value):
         self._value = value
 
+    @abc.abstractmethod
+    def operate(self, current_number):
+        pass
+
     @property
     def value(self):
         """Returns the value to add to the current number."""
         return self._value
 
     def __eq__(self, other):
-        return type(self) == type(other) and self._value == other.value
+        return isinstance(other, type(self)) and self._value == other.value
 
 
 class AddOperator(OperatorWithNumber):
